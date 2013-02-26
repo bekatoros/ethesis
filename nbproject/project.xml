@@ -20,6 +20,10 @@
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
+                    <file>${file.reference.cos-09May2002.jar-1}</file>
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
                     <file>${file.reference.cos-09May2002.jar}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>

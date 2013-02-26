@@ -95,7 +95,8 @@ if((Integer)session.getAttribute("verified")==1)
         MDvalue=StringToUTF(request.getParameter("description"));
         result=port.changeMetadata(dspaceuser, itemid.toString(),"dc", "description","","el",MDvalue);
         }        
-        catch(Exception e){} 
+        catch(Exception e){
+        out.println(e.toString());                       } 
            
         if((request.getParameter("filecbox")!=null)&&(request.getParameter("filecbox").equalsIgnoreCase("on")))
         {
@@ -127,6 +128,7 @@ if((Integer)session.getAttribute("verified")==1)
             result = port.completeSubmission(dspaceuser,itemid);  
             result = port.clearMetaData(dspaceuser,itemid,"dc","description","provenance","en");
             } catch (Exception ex) {
+                out.println(ex.toString());
                 // TODO handle custom exceptions here
             }
 
