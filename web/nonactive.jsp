@@ -86,25 +86,37 @@ String pagetoshow="<a href='index.jsp'></br>Δεν έχετε κάνει σύν�
                                 }else
                                 if(user.getRole()==3)//secretery
                                 {
-                                  String email;
+                                  
+                                 String email;
+                                 int number;
+                                 String extra="";
+                                 String fullname;
+                                 int level=-1;
                                   out.println("<h4  align='center'>Μη ενεργές υποβολές</h4>");  
                                   try{  
                                     //active tasks();
                                     statement = connection.createStatement();
-                                     rs = statement.executeQuery("SELECT * FROM Submission WHERE status=0 AND submitter="+user.getId()+";");
+                                     rs = statement.executeQuery("SELECT * FROM Submission WHERE ( status=0  or status=1) AND submitter="+user.getId()+";");
                                     
                                     out.println("<table border='1' align='center'>");
                                     while (rs.next())
                                     {//Στο λινκ τεξτ κατι θα βαλω αν και δε ξερω τι.μαλλον ονομα χρήστη
-                                     email=rs.getString("email"); 
-                                     substring=email.substring(0,email.length()-mail.length());                             
-                                     out.println("<tr><td>"+substring+"</td></tr>");
+                                     extra="";
+                                     if(rs.getInt("status")==1)
+                                     {
+                                     extra="χωρίς PDF";
+                                     }
+                                     email=rs.getString("email");   
+                                     substring=email.substring(0,email.length()-mail.length());   
+                                     level=rs.getInt("col_id");
+                                     out.println("<tr><td>"+substring+" "+collection[level]+" "+extra+"</td></tr>");
                                     }
-                                    out.println("</table>");                                  
+                                    out.println("</table>");           
+                                    out.println("<p>Άτομα με την ένδειξη χωρίς PDF δεν έχουν υποβάλει ακόμα το έγγραφο της εργασίας τους</p>");   
                                   }
                                   catch(Exception ex)
                                   {
-                                       out.println("<p>"+ex.toString()+"</p>") ;
+                                       out.println("<p>"+ex.toString()+"</p>") ;                                       
                                   }
 
                                 }else
