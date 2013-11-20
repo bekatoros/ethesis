@@ -352,7 +352,7 @@ else
                                     //add new submission(s)
                                   
                                      out.println("<table align='center'><tr><td><form action='newsub.jsp' method='post' style='width: 211px; height: 27px'>"
-                                       + "<input class='large blue button' name='Button1' type='submit' value='Υποβολή νέων εργασιών' ></input> </form></td>"
+                                       + "<input class='large blue button' name='Button1' type='submit' value='Υποβολή νέας εργασίας' ></input> </form></td>"
                                    + "<td><form action='mulsub.jsp' method='post' style='width: 211px; height: 27px'>"
                                        + "<input class='large blue button' name='Button2' type='submit' value='Υποβολή πολλαπλών εργασιών' ></input> </form><td><tr></table>"); 
                                    try

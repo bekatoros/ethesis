@@ -340,6 +340,14 @@ function displayerrorBox(num)
                                            }
 
                                         }
+                                         
+                                    if (level==2)     
+                                   {
+                                      result=port.showMetadataValue(dspaceuser, itemid.toString(), "dc", "contributor", "advisor","");
+                                       out.println("<tr><td  align='center' colspan='2'></br><label>Επιβλέπων Καθηγητής</label><br />");
+                                      out.println(" <input name='supervisor' id='supervisor' style='width: 250px; height: 25px' type='text' value='"+result+"' /></td></tr>");
+                                        
+                                   }
                                         
                                    //    dc 	description
                                          result=port.showMetadataValue(dspaceuser, itemid.toString(),"dc", "description","","el");
@@ -352,6 +360,7 @@ function displayerrorBox(num)
                                          
                                         if (level==2)
                                         {
+                                            
                                         statement2 = connection.createStatement();
                                         try{
                                         rs2 = statement2.executeQuery("SELECT datediff(`release`,now()) as days FROM delay WHERE sub_id="+number+" and checked=false");

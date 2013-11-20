@@ -266,7 +266,17 @@ else if ((Integer)session.getAttribute("verified")==1)
            }
              catch(Exception e){  
                 // out.println(e.toString());
-             }  
+             }
+     try{  
+          String supervisor= request.getParameter("supervisor");
+         MDvalue=StringToUTF(supervisor);              
+           String result = port.addMetadata(username,""+session.getAttribute("itemid"), "dc","contributor", "advisor", "", MDvalue); 
+          
+           }
+             catch(Exception e){  
+                // out.println(e.toString());
+             }
+            
        //Εδώ θα προσθέσω αν έχει εικόνες,πινακες ,διαγράμματα , xartes  kai σελιδες      
        
           MDvalue=""+request.getParameter("pages")+" σ.";
@@ -347,7 +357,9 @@ else if ((Integer)session.getAttribute("verified")==1)
            {
              //  out.println(ex.toString());
            }                            
-       }       
+       } 
+    
+                
        rs = statement.executeQuery("SELECT * FROM  Sub_Error where  '"+session.getAttribute("subid")+"'=sub_id AND metadata_id="+fileerror+" ;");
        try//Λήψη αρχείου 
        {
@@ -553,8 +565,18 @@ else if ((Integer)session.getAttribute("verified")==1)
                                         
                                         
                                     }  
+                                       String col =session.getAttribute("colid").toString();
+                                    if (col.equals("2"))     
+                                   {
+                                       out.println("<tr><td  align='center' colspan='2'></br><label>Επιβλέπων Καθηγητής</label><br />");
+                                      out.println(" <input name='supervisor' id='supervisor' style='width: 250px; height: 25px' type='text' value='"+value+"' /></td></tr>");
+                                        
+                                   }
+                                      
+                                       
+                                    
                                    out.println(" </tbody></table>");
-                                   out.println( "<label id='pages'  >Αριθμός Σελίδων *<br />"
+                                   out.println( "</br><label id='pages'  >Αριθμός Σελίδων *<br />"
                                             + "	</label>&nbsp;<input name='pages' style='width: 250px; height: 25px' type='text'/>");  
                                                                                                                                        
                                    out.println("</br><label>Η Εργασία σας περιέχει κάτι από τα παρακάτω;</label>"
@@ -564,7 +586,7 @@ else if ((Integer)session.getAttribute("verified")==1)
 					"Διαγράμματα</td><td><input name='diagrammata' type='checkbox' /></td></tr><tr><td align='center' colspan='4'>"+
 					"Χάρτες<input name='xartes' type='checkbox' /></td></tr></tbody></table>");
                                //   out.println("ffd"+session.getAttribute("colid")+session.getAttribute("colid").equals("1"));
-                                  String col =session.getAttribute("colid").toString();
+                              //    String col =session.getAttribute("colid").toString();
                                    if (col.equals("2"))     
                                    {
                                        out.println("</br><label>Περίοδος Αναμονής σε μήνες</label><select name='months' id='months' >");

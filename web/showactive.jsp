@@ -97,6 +97,16 @@ if((Integer)session.getAttribute("verified")==1)
         }        
         catch(Exception e){
         out.println(e.toString());                       } 
+        
+          try{  
+          String supervisor= request.getParameter("supervisor");
+         MDvalue=StringToUTF(supervisor);              
+          result = port.changeMetadata(dspaceuser,""+session.getAttribute("itemid"), "dc","contributor", "advisor", "", MDvalue); 
+          
+           }
+             catch(Exception e){  
+                // out.println(e.toString());
+             }
            
         if((request.getParameter("filecbox")!=null)&&(request.getParameter("filecbox").equalsIgnoreCase("on")))
         {
