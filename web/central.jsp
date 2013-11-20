@@ -352,7 +352,7 @@ else
                                     //add new submission(s)
                                   
                                      out.println("<table align='center'><tr><td><form action='newsub.jsp' method='post' style='width: 211px; height: 27px'>"
-                                       + "<input class='large blue button' name='Button1' type='submit' value='Υποβολή νέας εργασίας' ></input> </form></td>"
+                                       + "<input class='large blue button' name='Button1' type='submit' value='Υποβολή νέων εργασιών' ></input> </form></td>"
                                    + "<td><form action='mulsub.jsp' method='post' style='width: 211px; height: 27px'>"
                                        + "<input class='large blue button' name='Button2' type='submit' value='Υποβολή πολλαπλών εργασιών' ></input> </form><td><tr></table>"); 
                                    try
@@ -408,15 +408,20 @@ else
                                    try
                                    {                                      
                                     statement = connection.createStatement();
-                                    rs = statement.executeQuery("SELECT * FROM Submission WHERE status=0 AND submitter="+user.getId()+" ORDER BY RAND() LIMIT 5");                                           
+                                    rs = statement.executeQuery("SELECT * FROM Submission WHERE ( status=0  or status=1) AND submitter="+user.getId()+" ORDER BY RAND() LIMIT 5");                                           
                                     out.println("<h4  align='center'>Μη ενεργές υποβολές</h4>");
                                     out.println("<table border='1'  align='center'>");
                                     while (rs.next())
-                                    {                                 
+                                    {
+                                     extra="";
+                                     if(rs.getInt("status")==1)
+                                     {
+                                     extra="χωρίς PDF";
+                                     }
                                      email=rs.getString("email");   
                                      substring=email.substring(0,email.length()-mail.length());   
                                      level=rs.getInt("col_id");
-                                     out.println("<tr><td>"+substring+" "+collection[level]+"</td></tr>");
+                                     out.println("<tr><td>"+substring+" "+collection[level]+" "+extra+"</td></tr>");
                                     }
                                     out.println("</table>");
                                     out.println("<div align='center'><a href='nonactive.jsp' target='_blank' align='center'>Δείτε όλες τις μη ενεργές υποβολές</a></div>");
